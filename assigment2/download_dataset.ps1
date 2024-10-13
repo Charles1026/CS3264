@@ -1,0 +1,5 @@
+$DatasetURL = "https://storage.googleapis.com/kaggle-competitions-data/kaggle-v2/85366/9634322/compressed/ycb_dataset.zip?GoogleAccessId=web-data@kaggle-161607.iam.gserviceaccount.com&Expires=1729095115&Signature=WYwFsQGk%2FEAAxCJebme9XCpIt8K9IB2I60imj4ZydZrAMz1Bx6GONiJxWtLAKVn1i2OabphUHuXQBspVTY172CXAjkUMFLDnnHLnjZ2ixylE3YuxxHlqNBD%2BoDUiPeStgPUx%2Bddzl1n3iMEwhn8S1eCVieuTIMvbmY2o0kZycYVcyHNyfQqgXbCW%2F7Fcwh%2FMCUu7fxWSHvE9EFwDCwECUJytTn3FT99nzliX6ibHNvUE6j9MXHQjayUsgZ8iLqzq9Gs3WqfTic97%2FEmn4FNAPLPaJPvp%2BdBguUVo0ssToWhPGsT2JYBLreQObwWM6OyGH%2Bps1GIebqgjvQF7UQE9ig%3D%3D&response-content-disposition=attachment%3B+filename%3Dycb_dataset.zip"
+$ProgressPreference = 'SilentlyContinue'
+Invoke-WebRequest -Uri $DatasetURL -OutFile $PSScriptRoot\ycb_dataset.zip
+Expand-Archive -Path $PSScriptRoot\ycb_dataset.zip -DestinationPath $PSScriptRoot\ycb_dataset
+Remove-Item -Path $PSScriptRoot\ycb_dataset.zip
