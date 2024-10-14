@@ -32,12 +32,14 @@ def predict(predDir: str, model: ResNet):
 
 def savePredictions(outFile: str, predictions: List[Tuple[str, np.ndarray]]):
   with open(outFile, "w") as file:
+    file.write("img_id,class_0,class_1,class_2,class_3,class_4,class_5,class_6,class_7,class_8,class_9,class_10,class_11,class_12,class_13,class_14,class_15,class_16,class_17,class_18,class_19,class_20\n")
+    
     for name, labels in predictions:
-      file.write(f"{name}, ")
+      file.write(f"{name},")
       for idx, label in enumerate(labels):
         file.write(str(label))
         if (idx < labels.shape[0] - 1):
-          file.write(", ")
+          file.write(",")
       file.write("\n")
           
 if __name__ == "__main__":
