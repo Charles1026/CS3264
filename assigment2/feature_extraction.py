@@ -37,17 +37,17 @@ def loadAndExtractFeaturesAndLabels(resnet:ResNet, rootDir: str, loadLabels: boo
           labelsList.append(imgLabels.unsqueeze(0))
           
   if loadLabels:
-    return torch.cat(featuresList).cpu(), torch.cat(labelsList)
+    return torch.cat(featuresList).cpu().numpy(), torch.cat(labelsList).numpy()
   else:
-    return torch.cat(featuresList).cpu()
+    return torch.cat(featuresList).cpu().numpy()
       
 if __name__ == "__main__":
   print("Loading ResNet")
   resNetNoFC = createResNetNoFCLayer()
   
-  features, labels = loadAndExtractFeaturesAndLabels(resNetNoFC, ".\\data\\ycb_dataset\\train_data", loadLabels = True)
+  features, labels = loadAndExtractFeaturesAndLabels(resNetNoFC, TRAIN_DATSET_DIR, loadLabels = True)
   print(f"Loaded the features and labels for {features.shape[0]} images")
   
-  np.savez(FEATURES_OUTPUT_FILE, features= features.numpy(), labels = labels.numpy())
+  np.savez(FEATURES_OUTPUT_FILE, features= features, labels = labels)
   print(f"Saved features and labels to {FEATURES_OUTPUT_FILE}")
   

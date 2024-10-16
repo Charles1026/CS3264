@@ -32,7 +32,6 @@ def validateModel(model: MultiLabelPredictor, features: torch.Tensor, labels: to
     precision = tp / (tp + fp)
     recall = tp / (tp + fn)
     f1 = 2 * ((precision * recall) / (precision + recall))
-    # print(f"Class {labelIdx} has precision {precision}, recall {recall} and f1 {f1}")
     totalF1Score += f1
     
   return totalF1Score / labels.shape[1]
@@ -42,6 +41,6 @@ if __name__ == "__main__":
   weights = np.load(MODEL_WEIGHTS_FILE)
   data = np.load(TEST_DATA_FILE)
   
-  resnet = MultiLabelPredictor(torch.tensor(weights["intercepts"], dtype = torch.float32).squeeze(), torch.tensor(weights["coefs"], dtype = torch.float32).squeeze()).to(DEVICE)
-  macroF1Metric = validateModel(resnet, torch.tensor(data["features"]), torch.tensor(data["labels"]))
-  print(f"Model has macro F1 metric of {macroF1Metric}")
+  logClassifier = MultiLabelPredictor(torch.tensor(weights["intercepts"], dtype = torch.float32).squeeze(), torch.tensor(weights["coefs"], dtype = torch.float32).squeeze()).to(DEVICE)
+  macroF1Metric = validateModel(logClassifier, torch.tensor(data["features"]), torch.tensor(data["labels"]))
+  print(f"Model has macro F1 metric of {macroF1Metric:.2f} on validation data.")

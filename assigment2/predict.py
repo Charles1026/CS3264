@@ -13,7 +13,7 @@ from common import *
 def predict(predDir: str, model: ResNet):
   
   predList: List = [] 
-  for videoId in tqdm(os.listdir(predDir), desc = "Extracing Features"):    
+  for videoId in tqdm(os.listdir(predDir), desc = "Predicting"):    
     videoDir = os.path.join(predDir, videoId)
     if not os.path.isdir(videoDir): continue
     
@@ -47,5 +47,5 @@ if __name__ == "__main__":
   weights = np.load(MODEL_WEIGHTS_FILE)
   
   resnet: ResNet = createResNetCustomFCLayer(torch.tensor(weights["intercepts"], dtype = torch.float32).squeeze(), torch.tensor(weights["coefs"], dtype = torch.float32).squeeze())
-  predictions = predict(".\\data\\ycb_dataset\\test_data", resnet)
-  savePredictions(".\\data\\predictions.csv", predictions)
+  predictions = predict(TEST_DATSET_DIR, resnet)
+  savePredictions(TEST_OUTPUT_FILE, predictions)

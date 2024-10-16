@@ -30,10 +30,13 @@ CLASS_NAME_TO_ID_MAP = {
 }
 
 DATA_DIR = ".\\data"
+TRAIN_DATSET_DIR = os.path.join(DATA_DIR, "ycb_dataset", "train_data")
+TEST_DATSET_DIR = os.path.join(DATA_DIR, "ycb_dataset", "test_data")
 FEATURES_OUTPUT_FILE = os.path.join(DATA_DIR, "features", "combined_features.npz")
 TRAIN_DATA_FILE = os.path.join(DATA_DIR, "features", "train_features.npz")
 TEST_DATA_FILE = os.path.join(DATA_DIR, "features", "test_features.npz")
 MODEL_WEIGHTS_FILE = os.path.join(DATA_DIR, "features", "model_weights.npz")
+TEST_OUTPUT_FILE = os.path.join(DATA_DIR, "predictions.csv")
 
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
